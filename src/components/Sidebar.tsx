@@ -1,5 +1,6 @@
+
 import React from "react";
-import { Home, Users, DollarSign, BarChart3 } from "lucide-react";
+import { Home, Users, DollarSign, BarChart3, Store } from "lucide-react";
 
 interface SidebarProps {
   activeSection: string;
@@ -11,7 +12,8 @@ const Sidebar: React.FC<SidebarProps> = ({
   setActiveSection,
 }) => {
   const menuItems = [
-    { id: "dashboard", label: "Dashboard", icon: Home },
+    { id: "marketplace", label: "Borrower Marketplace", icon: Store },
+    { id: "dashboard", label: "Financial Passports", icon: Home },
     { id: "origination", label: "Loan Origination", icon: DollarSign },
     { id: "management", label: "Loan Management", icon: BarChart3 },
   ];
