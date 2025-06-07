@@ -144,6 +144,7 @@ const BorrowerMarketplace: React.FC<BorrowerMarketplaceProps> = ({ onSelectBorro
       name: `${borrower.basicDetails.occupation} from ${borrower.basicDetails.location}`,
       age: borrower.basicDetails.age,
       location: borrower.basicDetails.location,
+      country: borrower.basicDetails.location.split(', ')[1] || borrower.basicDetails.location,
       occupation: borrower.basicDetails.occupation,
       gigPlatform: borrower.basicDetails.platform,
       creditScore: borrower.financialScore,
@@ -152,7 +153,11 @@ const BorrowerMarketplace: React.FC<BorrowerMarketplaceProps> = ({ onSelectBorro
       riskCategory: borrower.riskCategory,
       monthlyIncome: Math.round(borrower.loanAmount / 3.2), // Reverse calculate from suggested limit
       requestedAmount: borrower.loanAmount,
-      seekingRate: borrower.seekingRate
+      seekingRate: borrower.seekingRate,
+      // Add missing properties for FinancialPassport component
+      did: `did:ethr:0x${Math.random().toString(16).substr(2, 40)}`,
+      walletAge: `${Math.floor(Math.random() * 24) + 12} months`,
+      txnCount: Math.floor(Math.random() * 1000) + 500
     };
 
     if (onSelectBorrower) {
