@@ -25,16 +25,21 @@ const LenderPage = () => {
     return <AuthScreen />;
   }
 
+  const handleSelectBorrower = (borrower: any) => {
+    setSelectedBorrower(borrower);
+    setActiveSection('origination');
+  };
+
   const renderContent = () => {
     switch (activeSection) {
       case 'marketplace':
-        return <BorrowerMarketplace />;
+        return <BorrowerMarketplace onSelectBorrower={handleSelectBorrower} />;
       case 'origination':
         return <LoanOrigination selectedBorrower={selectedBorrower} />;
       case 'management':
         return <LoanManagement />;
       default:
-        return <BorrowerMarketplace />;
+        return <BorrowerMarketplace onSelectBorrower={handleSelectBorrower} />;
     }
   };
 
