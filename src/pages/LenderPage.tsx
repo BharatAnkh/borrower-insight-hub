@@ -4,10 +4,13 @@ import { useAuth } from '../hooks/useAuth';
 import Sidebar from '../components/Sidebar';
 import TopNav from '../components/TopNav';
 import BorrowerMarketplace from '../components/BorrowerMarketplace';
+import LoanOrigination from '../components/LoanOrigination';
+import LoanManagement from '../components/LoanManagement';
 import AuthScreen from '../components/AuthScreen';
 
 const LenderPage = () => {
   const [activeSection, setActiveSection] = useState('marketplace');
+  const [selectedBorrower, setSelectedBorrower] = useState(null);
   const { user, isAuthenticated, loading } = useAuth();
 
   if (loading) {
@@ -27,19 +30,9 @@ const LenderPage = () => {
       case 'marketplace':
         return <BorrowerMarketplace />;
       case 'origination':
-        return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold mb-4">Loan Origination</h2>
-            <p>Loan origination functionality will be implemented here.</p>
-          </div>
-        );
+        return <LoanOrigination selectedBorrower={selectedBorrower} />;
       case 'management':
-        return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold mb-4">Loan Management</h2>
-            <p>Loan management functionality will be implemented here.</p>
-          </div>
-        );
+        return <LoanManagement />;
       default:
         return <BorrowerMarketplace />;
     }
