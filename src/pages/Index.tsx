@@ -5,9 +5,9 @@ import { useAuth } from '../hooks/useAuth';
 import Sidebar from '../components/Sidebar';
 import TopNav from '../components/TopNav';
 import BorrowerLookup from '../components/BorrowerLookup';
-import AnalysisReport from '../components/AnalysisReport';
 import LoanOrigination from '../components/LoanOrigination';
 import LoanManagement from '../components/LoanManagement';
+import DashboardPassports from '../components/DashboardPassports';
 import { ThemeProvider } from '../contexts/ThemeContext';
 
 const Index = () => {
@@ -45,17 +45,10 @@ const Index = () => {
           <TopNav user={user} />
           <main className="flex-1 p-6 overflow-auto">
             {activeSection === 'dashboard' && (
-              <div className="space-y-6">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <BorrowerLookup 
-                    onBorrowerSelect={setSelectedBorrower}
-                    selectedBorrower={selectedBorrower}
-                  />
-                  {selectedBorrower && (
-                    <AnalysisReport borrower={selectedBorrower} />
-                  )}
-                </div>
-              </div>
+              <DashboardPassports onBorrowerSelect={(borrower) => {
+                setSelectedBorrower(borrower);
+                setActiveSection('origination');
+              }} />
             )}
             {activeSection === 'origination' && (
               <LoanOrigination selectedBorrower={selectedBorrower} />
