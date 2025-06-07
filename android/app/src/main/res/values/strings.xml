@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">FinancialPassport</string>
+    <string name="title_activity_main">FinancialPassport</string>
+    <string name="package_name">app.lovable.e523e043110b4a1382de0d357501360c</string>
+    <string name="custom_url_scheme">app.lovable.e523e043110b4a1382de0d357501360c</string>
+</resources>
