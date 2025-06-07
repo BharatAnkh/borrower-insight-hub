@@ -4,14 +4,14 @@ import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import Sidebar from '../components/Sidebar';
 import TopNav from '../components/TopNav';
-import BorrowerLookup from '../components/BorrowerLookup';
+import BorrowerMarketplace from '../components/BorrowerMarketplace';
 import LoanOrigination from '../components/LoanOrigination';
 import LoanManagement from '../components/LoanManagement';
 import DashboardPassports from '../components/DashboardPassports';
 import { ThemeProvider } from '../contexts/ThemeContext';
 
 const Index = () => {
-  const [activeSection, setActiveSection] = useState('dashboard');
+  const [activeSection, setActiveSection] = useState('marketplace');
   const [selectedBorrower, setSelectedBorrower] = useState(null);
   const { user, isAuthenticated, login } = useAuth();
 
@@ -44,6 +44,9 @@ const Index = () => {
         <div className="flex-1 flex flex-col">
           <TopNav user={user} />
           <main className="flex-1 p-6 overflow-auto">
+            {activeSection === 'marketplace' && (
+              <BorrowerMarketplace />
+            )}
             {activeSection === 'dashboard' && (
               <DashboardPassports onBorrowerSelect={(borrower) => {
                 setSelectedBorrower(borrower);

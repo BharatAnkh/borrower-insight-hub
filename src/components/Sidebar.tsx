@@ -9,7 +9,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) => {
   const menuItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: Home },
+    { id: 'marketplace', label: 'Borrower Marketplace', icon: Home },
     { id: 'origination', label: 'Loan Origination', icon: DollarSign },
     { id: 'management', label: 'Loan Management', icon: BarChart3 },
   ];
