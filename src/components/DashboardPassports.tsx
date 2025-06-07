@@ -1,12 +1,13 @@
-
-import React from 'react';
-import { FileText, MapPin, Briefcase, DollarSign, TrendingUp } from 'lucide-react';
+import React, { useState } from 'react';
+import { FileText, MapPin, Briefcase, DollarSign, TrendingUp, Search } from 'lucide-react';
 
 interface DashboardPassportsProps {
   onBorrowerSelect: (borrower: any) => void;
 }
 
 const DashboardPassports: React.FC<DashboardPassportsProps> = ({ onBorrowerSelect }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+
   const mockBorrowers = [
     {
       id: '1',
@@ -91,6 +92,13 @@ const DashboardPassports: React.FC<DashboardPassportsProps> = ({ onBorrowerSelec
     return 'from-red-500 to-red-600';
   };
 
+  const filteredBorrowers = mockBorrowers.filter(borrower =>
+    borrower.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    borrower.country.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    borrower.gigPlatform.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    borrower.did.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="space-y-6">
       <div className="mb-8">
@@ -102,8 +110,20 @@ const DashboardPassports: React.FC<DashboardPassportsProps> = ({ onBorrowerSelec
         </p>
       </div>
 
+      {/* Search Bar */}
+      <div className="relative max-w-md">
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+        <input
+          type="text"
+          placeholder="Search by name, country, platform, or DID..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+        />
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-        {mockBorrowers.map((borrower) => (
+        {filteredBorrowers.map((borrower) => (
           <div
             key={borrower.id}
             onClick={() => onBorrowerSelect(borrower)}
@@ -193,6 +213,17 @@ const DashboardPassports: React.FC<DashboardPassportsProps> = ({ onBorrowerSelec
           </div>
         ))}
       </div>
+
+      {filteredBorrowers.length === 0 && searchTerm && (
+        <div className="text-center py-12">
+          <p className="text-gray-500 dark:text-gray-400 text-lg">
+            No passports found matching "{searchTerm}"
+          </p>
+          <p className="text-gray-400 dark:text-gray-500 text-sm mt-2">
+            Try searching by name, country, platform, or DID
+          </p>
+        </div>
+      )}
     </div>
   );
 };
