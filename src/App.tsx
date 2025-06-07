@@ -11,6 +11,7 @@ import ConnectData from "./pages/ConnectData";
 import Insights from "./pages/Insights";
 import Marketplace from "./pages/Marketplace";
 import Profile from "./pages/Profile";
+import LenderPage from "./pages/LenderPage";
 import MobileLayout from "./components/MobileLayout";
 import NotFound from "./pages/NotFound";
 
@@ -32,6 +33,7 @@ const App = () => (
               <Route path="marketplace" element={<Marketplace />} />
               <Route path="profile" element={<Profile />} />
             </Route>
+            <Route path="/lender_page" element={<LenderPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

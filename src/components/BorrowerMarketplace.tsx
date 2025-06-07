@@ -21,6 +21,10 @@ interface BorrowerListing {
   riskCategory: 'Low' | 'Medium' | 'High';
 }
 
+interface BorrowerMarketplaceProps {
+  onSelectBorrower?: (borrower: any) => void;
+}
+
 // Mock API call for fetching borrower listings
 const fetchBorrowerListings = async (): Promise<BorrowerListing[]> => {
   // Simulate API delay
@@ -95,7 +99,7 @@ const expressInterest = async (borrowerId: string): Promise<{ success: boolean; 
   };
 };
 
-const BorrowerMarketplace: React.FC = () => {
+const BorrowerMarketplace: React.FC<BorrowerMarketplaceProps> = ({ onSelectBorrower }) => {
   const [borrowers, setBorrowers] = useState<BorrowerListing[]>([]);
   const [filteredBorrowers, setFilteredBorrowers] = useState<BorrowerListing[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -132,6 +136,34 @@ const BorrowerMarketplace: React.FC = () => {
     );
     setFilteredBorrowers(filtered);
   }, [searchTerm, borrowers]);
+
+  const handleSelectBorrower = (borrower: BorrowerListing) => {
+    // Convert borrower listing to the format expected by LoanOrigination
+    const selectedBorrowerData = {
+      id: borrower.id,
+      name: `${borrower.basicDetails.occupation} from ${borrower.basicDetails.location}`,
+      age: borrower.basicDetails.age,
+      location: borrower.basicDetails.location,
+      country: borrower.basicDetails.location.split(', ')[1] || borrower.basicDetails.location,
+      occupation: borrower.basicDetails.occupation,
+      gigPlatform: borrower.basicDetails.platform,
+      creditScore: borrower.financialScore,
+      suggestedLimit: borrower.loanAmount,
+      avgRating: 4.8,
+      riskCategory: borrower.riskCategory,
+      monthlyIncome: Math.round(borrower.loanAmount / 3.2), // Reverse calculate from suggested limit
+      requestedAmount: borrower.loanAmount,
+      seekingRate: borrower.seekingRate,
+      // Add missing properties for FinancialPassport component
+      did: `did:ethr:0x${Math.random().toString(16).substr(2, 40)}`,
+      walletAge: `${Math.floor(Math.random() * 24) + 12} months`,
+      txnCount: Math.floor(Math.random() * 1000) + 500
+    };
+
+    if (onSelectBorrower) {
+      onSelectBorrower(selectedBorrowerData);
+    }
+  };
 
   const handleExpressInterest = async (borrowerId: string) => {
     try {
@@ -268,17 +300,28 @@ const BorrowerMarketplace: React.FC = () => {
                 </div>
               )}
 
-              {/* Express Interest Button */}
-              <Button 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleExpressInterest(borrower.id);
-                }}
-                className="w-full mt-4"
-                variant="default"
-              >
-                Express Interest
-              </Button>
+              {/* Action Buttons */}
+              <div className="flex space-x-2">
+                <Button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleSelectBorrower(borrower);
+                  }}
+                  className="flex-1"
+                  variant="default"
+                >
+                  Select for Loan
+                </Button>
+                <Button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleExpressInterest(borrower.id);
+                  }}
+                  variant="outline"
+                >
+                  Express Interest
+                </Button>
+              </div>
             </CardContent>
           </Card>
         ))}
