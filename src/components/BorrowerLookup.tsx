@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Search, User, CreditCard, TrendingUp } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
@@ -13,12 +12,15 @@ const BorrowerLookup: React.FC<BorrowerLookupProps> = ({ onBorrowerSelect, selec
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  // Mock borrower data
+  // Enhanced mock borrower data
   const mockBorrowers = [
     {
       id: '1',
       did: 'did:ethr:0x1234...5678',
       name: 'Alex Johnson',
+      age: 28,
+      country: 'United States',
+      gigPlatform: 'Uber/Lyft',
       creditScore: 742,
       suggestedLimit: 25000,
       shapDrivers: [
@@ -34,6 +36,9 @@ const BorrowerLookup: React.FC<BorrowerLookupProps> = ({ onBorrowerSelect, selec
       id: '2',
       did: 'did:ethr:0xabcd...efgh',
       name: 'Maria Rodriguez',
+      age: 34,
+      country: 'Mexico',
+      gigPlatform: 'DoorDash/Instacart',
       creditScore: 695,
       suggestedLimit: 18000,
       shapDrivers: [
@@ -119,7 +124,7 @@ const BorrowerLookup: React.FC<BorrowerLookupProps> = ({ onBorrowerSelect, selec
                       {borrower.name}
                     </p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      {borrower.did}
+                      {borrower.country} • {borrower.gigPlatform}
                     </p>
                   </div>
                   <div className="text-right">
