@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "vite_react_shadcn_ts",
+    "slug": "vite_react_shadcn_ts",
+    "version": "0.0.0",
+    "sdkVersion": "49.0.0",
+    "platforms": [],
+    "android": {
+      "package": "com.shirsho12.xrp"
+    }
+  }
+}

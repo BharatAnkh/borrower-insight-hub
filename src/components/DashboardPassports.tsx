@@ -1,21 +1,30 @@
-import React, { useState } from 'react';
-import { FileText, MapPin, Briefcase, DollarSign, TrendingUp, Search } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  FileText,
+  MapPin,
+  Briefcase,
+  DollarSign,
+  TrendingUp,
+  Search,
+} from "lucide-react";
 
 interface DashboardPassportsProps {
   onBorrowerSelect: (borrower: any) => void;
 }
 
-const DashboardPassports: React.FC<DashboardPassportsProps> = ({ onBorrowerSelect }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+const DashboardPassports: React.FC<DashboardPassportsProps> = ({
+  onBorrowerSelect,
+}) => {
+  const [searchTerm, setSearchTerm] = useState("");
 
   const mockBorrowers = [
     {
-      id: '1',
-      did: 'did:ethr:0x1234...5678',
-      name: 'Alex Johnson',
+      id: "1",
+      did: "did:ethr:0x1234...5678",
+      name: "Alex Johnson",
       age: 28,
-      country: 'United States',
-      gigPlatform: 'Uber/Lyft',
+      country: "United States",
+      gigPlatform: "Uber/Lyft",
       creditScore: 742,
       suggestedLimit: 25000,
       monthlyEarnings: 5200,
@@ -24,21 +33,21 @@ const DashboardPassports: React.FC<DashboardPassportsProps> = ({ onBorrowerSelec
       stabilityScore: 8.2,
       avgRating: 4.8,
       shapDrivers: [
-        { name: 'Payment History', value: 0.35, icon: FileText },
-        { name: 'Income Stability', value: 0.28, icon: TrendingUp },
-        { name: 'Debt Ratio', value: 0.22, icon: DollarSign }
+        { name: "Payment History", value: 0.35, icon: FileText },
+        { name: "Income Stability", value: 0.28, icon: TrendingUp },
+        { name: "Debt Ratio", value: 0.22, icon: DollarSign },
       ],
-      walletAge: '2.3 years',
+      walletAge: "2.3 years",
       txnCount: 1247,
-      avgMonthlyIncome: 5200
+      avgMonthlyIncome: 5200,
     },
     {
-      id: '2',
-      did: 'did:ethr:0xabcd...efgh',
-      name: 'Maria Rodriguez',
+      id: "2",
+      did: "did:ethr:0xabcd...efgh",
+      name: "Maria Rodriguez",
       age: 34,
-      country: 'Mexico',
-      gigPlatform: 'DoorDash/Instacart',
+      country: "Mexico",
+      gigPlatform: "DoorDash/Instacart",
       creditScore: 695,
       suggestedLimit: 18000,
       monthlyEarnings: 4100,
@@ -47,21 +56,21 @@ const DashboardPassports: React.FC<DashboardPassportsProps> = ({ onBorrowerSelec
       stabilityScore: 7.5,
       avgRating: 4.6,
       shapDrivers: [
-        { name: 'Payment History', value: 0.31, icon: FileText },
-        { name: 'Credit Utilization', value: 0.29, icon: TrendingUp },
-        { name: 'Income Stability', value: 0.25, icon: DollarSign }
+        { name: "Payment History", value: 0.31, icon: FileText },
+        { name: "Credit Utilization", value: 0.29, icon: TrendingUp },
+        { name: "Income Stability", value: 0.25, icon: DollarSign },
       ],
-      walletAge: '1.8 years',
+      walletAge: "1.8 years",
       txnCount: 892,
-      avgMonthlyIncome: 4100
+      avgMonthlyIncome: 4100,
     },
     {
-      id: '3',
-      did: 'did:ethr:0xdef0...1234',
-      name: 'James Chen',
+      id: "3",
+      did: "did:ethr:0xdef0...1234",
+      name: "James Chen",
       age: 31,
-      country: 'United States',
-      gigPlatform: 'TaskRabbit/Fiverr',
+      country: "United States",
+      gigPlatform: "TaskRabbit/Fiverr",
       creditScore: 718,
       suggestedLimit: 22000,
       monthlyEarnings: 4800,
@@ -70,33 +79,34 @@ const DashboardPassports: React.FC<DashboardPassportsProps> = ({ onBorrowerSelec
       stabilityScore: 7.8,
       avgRating: 4.9,
       shapDrivers: [
-        { name: 'Payment History', value: 0.33, icon: FileText },
-        { name: 'Income Diversity', value: 0.27, icon: TrendingUp },
-        { name: 'Spending Patterns', value: 0.24, icon: DollarSign }
+        { name: "Payment History", value: 0.33, icon: FileText },
+        { name: "Income Diversity", value: 0.27, icon: TrendingUp },
+        { name: "Spending Patterns", value: 0.24, icon: DollarSign },
       ],
-      walletAge: '3.1 years',
+      walletAge: "3.1 years",
       txnCount: 2156,
-      avgMonthlyIncome: 4800
-    }
+      avgMonthlyIncome: 4800,
+    },
   ];
 
   const getScoreColor = (score: number) => {
-    if (score >= 750) return 'text-green-500';
-    if (score >= 650) return 'text-yellow-500';
-    return 'text-red-500';
+    if (score >= 75) return "text-green-500";
+    if (score >= 65) return "text-yellow-500";
+    return "text-red-500";
   };
 
   const getScoreGradient = (score: number) => {
-    if (score >= 750) return 'from-green-500 to-green-600';
-    if (score >= 650) return 'from-yellow-500 to-yellow-600';
-    return 'from-red-500 to-red-600';
+    if (score >= 75) return "from-green-500 to-green-600";
+    if (score >= 65) return "from-yellow-500 to-yellow-600";
+    return "from-red-500 to-red-600";
   };
 
-  const filteredBorrowers = mockBorrowers.filter(borrower =>
-    borrower.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    borrower.country.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    borrower.gigPlatform.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    borrower.did.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredBorrowers = mockBorrowers.filter(
+    (borrower) =>
+      borrower.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      borrower.country.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      borrower.gigPlatform.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      borrower.did.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -151,25 +161,37 @@ const DashboardPassports: React.FC<DashboardPassportsProps> = ({ onBorrowerSelec
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div className="flex items-center space-x-2">
                 <MapPin className="w-4 h-4 text-gray-500" />
-                <span className="text-sm text-gray-700 dark:text-gray-300">{borrower.country}</span>
+                <span className="text-sm text-gray-700 dark:text-gray-300">
+                  {borrower.country}
+                </span>
               </div>
               <div className="flex items-center space-x-2">
                 <Briefcase className="w-4 h-4 text-gray-500" />
-                <span className="text-sm text-gray-700 dark:text-gray-300">{borrower.gigPlatform}</span>
+                <span className="text-sm text-gray-700 dark:text-gray-300">
+                  {borrower.gigPlatform}
+                </span>
               </div>
             </div>
 
             {/* Credit Score */}
             <div className="mb-4">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-gray-600 dark:text-gray-400">Credit Score</span>
-                <span className={`text-lg font-bold ${getScoreColor(borrower.creditScore)}`}>
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  Credit Score
+                </span>
+                <span
+                  className={`text-lg font-bold ${getScoreColor(
+                    borrower.creditScore
+                  )}`}
+                >
                   {borrower.creditScore}
                 </span>
               </div>
               <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                <div 
-                  className={`h-2 rounded-full bg-gradient-to-r ${getScoreGradient(borrower.creditScore)}`}
+                <div
+                  className={`h-2 rounded-full bg-gradient-to-r ${getScoreGradient(
+                    borrower.creditScore
+                  )}`}
                   style={{ width: `${(borrower.creditScore / 850) * 100}%` }}
                 ></div>
               </div>
@@ -178,13 +200,17 @@ const DashboardPassports: React.FC<DashboardPassportsProps> = ({ onBorrowerSelec
             {/* Financial Metrics */}
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
-                <p className="text-xs text-gray-600 dark:text-gray-400">Monthly Earnings</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  Monthly Earnings
+                </p>
                 <p className="font-semibold text-gray-900 dark:text-white">
                   ${borrower.monthlyEarnings.toLocaleString()}
                 </p>
               </div>
               <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
-                <p className="text-xs text-gray-600 dark:text-gray-400">Monthly Spending</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  Monthly Spending
+                </p>
                 <p className="font-semibold text-gray-900 dark:text-white">
                   ${borrower.monthlySpending.toLocaleString()}
                 </p>
@@ -194,18 +220,28 @@ const DashboardPassports: React.FC<DashboardPassportsProps> = ({ onBorrowerSelec
             {/* Scores */}
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div>
-                <p className="text-xs text-gray-600 dark:text-gray-400">Savings Rate</p>
-                <p className="font-semibold text-green-600 dark:text-green-400">{borrower.savingsRate}%</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  Savings Rate
+                </p>
+                <p className="font-semibold text-green-600 dark:text-green-400">
+                  {borrower.savingsRate}%
+                </p>
               </div>
               <div>
-                <p className="text-xs text-gray-600 dark:text-gray-400">Stability Score</p>
-                <p className="font-semibold text-blue-600 dark:text-blue-400">{borrower.stabilityScore}/10</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  Stability Score
+                </p>
+                <p className="font-semibold text-blue-600 dark:text-blue-400">
+                  {borrower.stabilityScore}/10
+                </p>
               </div>
             </div>
 
             {/* Suggested Limit */}
             <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
-              <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">Suggested Limit</p>
+              <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">
+                Suggested Limit
+              </p>
               <p className="text-xl font-bold text-blue-700 dark:text-blue-300">
                 ${borrower.suggestedLimit.toLocaleString()}
               </p>

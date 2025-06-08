@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React from "react";
 
 interface LoanConfigurationProps {
   loanAmount: number;
@@ -22,7 +21,7 @@ const LoanConfiguration: React.FC<LoanConfigurationProps> = ({
   onLoanAmountChange,
   onLoanTermChange,
   onInterestRateChange,
-  onOriginationFeeRateChange
+  onOriginationFeeRateChange,
 }) => {
   return (
     <div className="space-y-6">
@@ -32,9 +31,9 @@ const LoanConfiguration: React.FC<LoanConfigurationProps> = ({
         </label>
         <input
           type="range"
-          min="5000"
+          min="500"
           max={maxLoanAmount}
-          step="1000"
+          step="100"
           value={loanAmount}
           onChange={(e) => onLoanAmountChange(Number(e.target.value))}
           className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
@@ -44,7 +43,7 @@ const LoanConfiguration: React.FC<LoanConfigurationProps> = ({
           <span>${maxLoanAmount.toLocaleString()}</span>
         </div>
       </div>
-      
+
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
           Loan Term
@@ -61,7 +60,7 @@ const LoanConfiguration: React.FC<LoanConfigurationProps> = ({
           <option value={36}>36 months</option>
         </select>
       </div>
-      
+
       <div className="grid grid-cols-1 gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -77,7 +76,7 @@ const LoanConfiguration: React.FC<LoanConfigurationProps> = ({
             className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
           />
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Origination Fee (%)
